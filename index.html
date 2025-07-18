@@ -1,86 +1,165 @@
-<!DOCTYPE html><html lang="id"><head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FikaAi | MultiTools</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }body {
-  background: linear-gradient(145deg, #0f2027, #203a43, #2c5364);
-  color: #fff;
-  padding: 20px;
-}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Multi Tools API | Handii</title>
+    <style>
+        body {
+            background: #111;
+            color: #fff;
+            font-family: sans-serif;
+            padding: 20px;
+        }
+        h1 { text-align: center; color: cyan; }
+        .tool {
+            background: #1e1e1e;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+        }
+        input, button {
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            background: cyan;
+            color: #111;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 10px;
+            color: lime;
+        }
+    </style>
+</head>
+<body>
+    <h1>Multi Tools API - Handii</h1>
 
-h1 {
-  text-align: center;
-  margin-bottom: 30px;
-}
+    <div class="tool">
+        <h2>Cek IP Address</h2>
+        <button onclick="cekIP()">Lihat IP Saya</button>
+        <div class="result" id="ipResult"></div>
+    </div>
 
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
+    <div class="tool">
+        <h2>Cek Kode Pos</h2>
+        <input type="text" id="kodeposInput" placeholder="Masukkan Kota">
+        <button onclick="cekKodePos()">Cari</button>
+        <div class="result" id="kodeposResult"></div>
+    </div>
 
-.tool-card {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
+    <div class="tool">
+        <h2>Cek Cuaca</h2>
+        <input type="text" id="cuacaInput" placeholder="Masukkan Kota">
+        <button onclick="cekCuaca()">Cari</button>
+        <div class="result" id="cuacaResult"></div>
+    </div>
 
-.tool-card:hover {
-  transform: translateY(-10px);
-  background: rgba(255, 255, 255, 0.1);
-}
+    <div class="tool">
+        <h2>QR Generator</h2>
+        <input type="text" id="qrInput" placeholder="Masukkan Teks / Link">
+        <button onclick="generateQR()">Generate</button>
+        <div class="result" id="qrResult"></div>
+    </div>
 
-.tool-card h3 {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
+    <div class="tool">
+        <h2>Shortlink Generator</h2>
+        <input type="text" id="shortInput" placeholder="Masukkan Link">
+        <button onclick="shortLink()">Shorten</button>
+        <div class="result" id="shortResult"></div>
+    </div>
 
-.tool-card p {
-  font-size: 14px;
-  opacity: 0.8;
-}
+    <div class="tool">
+        <h2>Cek Provider Nomor</h2>
+        <input type="text" id="providerInput" placeholder="Masukkan Nomor">
+        <button onclick="cekProvider()">Cek</button>
+        <div class="result" id="providerResult"></div>
+    </div>
 
-  </style>
-</head><body>
-  <h1>FikaAi | MultiTools</h1>
-  <div class="grid-container">
-    <div class="tool-card" onclick="location.href='fikaai-spotify.html'">
-      <h3>Spotify versi FikaAi</h3>
-      <p>Pemutar musik modern dan elegan.</p>
+    <div class="tool">
+        <h2>Random Quotes</h2>
+        <button onclick="getQuotes()">Ambil Quotes</button>
+        <div class="result" id="quotesResult"></div>
     </div>
-    <div class="tool-card" onclick="location.href='fikaai-deepseek.html'">
-      <h3>DeepSeek versi FikaAi</h3>
-      <p>AI pencari jawaban cepat & pintar.</p>
+
+    <div class="tool">
+        <h2>TikTok / YouTube Downloader</h2>
+        <input type="text" id="dlInput" placeholder="Masukkan Link">
+        <button onclick="downloadMedia()">Download</button>
+        <div class="result" id="dlResult"></div>
     </div>
-    <div class="tool-card" onclick="location.href='fikaai-ytdl.html'">
-      <h3>YouTube Downloader</h3>
-      <p>Unduh video & musik dari YouTube.</p>
-    </div>
-    <div class="tool-card" onclick="location.href='fikaai-store.html'">
-      <h3>Store versi FikaAi</h3>
-      <p>Jasa digital dan panel dalam satu tempat.</p>
-    </div>
-    <div class="tool-card" onclick="location.href='fikaai-chatgpt.html'">
-      <h3>ChatGPT versi FikaAi</h3>
-      <p>Obrolan AI smart & cepat.</p>
-    </div>
-    <div class="tool-card" onclick="location.href='fikaai-translate.html'">
-      <h3>Translate versi FikaAi</h3>
-      <p>Terjemahkan antar bahasa dunia.</p>
-    </div>
-    <div class="tool-card" onclick="location.href='fikaai-calculator.html'">
-      <h3>Kalkulator versi FikaAi</h3>
-      <p>Hitung cerdas dan bergaya modern.</p>
-    </div>
-  </div>
-</body></html>
+
+    <script>
+        function cekIP() {
+            fetch('https://api.ditss.cloud/ip')
+                .then(res => res.json())
+                .then(data => {
+                    ipResult.innerText = data.ip;
+                });
+        }
+
+        function cekKodePos() {
+            let kota = kodeposInput.value;
+            fetch(`https://api.ditss.cloud/postal?city=${kota}`)
+                .then(res => res.json())
+                .then(data => {
+                    kodeposResult.innerText = JSON.stringify(data);
+                });
+        }
+
+        function cekCuaca() {
+            let kota = cuacaInput.value;
+            fetch(`https://api.ditss.cloud/weather?city=${kota}`)
+                .then(res => res.json())
+                .then(data => {
+                    cuacaResult.innerText = `${data.city}: ${data.weather} ${data.temp}°C`;
+                });
+        }
+
+        function generateQR() {
+            let teks = qrInput.value;
+            qrResult.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(teks)}&size=150x150"/>`;
+        }
+
+        function shortLink() {
+            let link = shortInput.value;
+            fetch(`https://api.ditss.cloud/shortlink?url=${encodeURIComponent(link)}`)
+                .then(res => res.json())
+                .then(data => {
+                    shortResult.innerHTML = `<a href="${data.short}" target="_blank">${data.short}</a>`;
+                });
+        }
+
+        function cekProvider() {
+            let no = providerInput.value;
+            fetch(`https://api.ditss.cloud/phone?number=${no}`)
+                .then(res => res.json())
+                .then(data => {
+                    providerResult.innerText = `Provider: ${data.provider}`;
+                });
+        }
+
+        function getQuotes() {
+            fetch('https://api.ditss.cloud/quotes')
+                .then(res => res.json())
+                .then(data => {
+                    quotesResult.innerText = `${data.quote} - ${data.author}`;
+                });
+        }
+
+        function downloadMedia() {
+            let link = dlInput.value;
+            fetch(`https://api.ditss.cloud/dl?url=${encodeURIComponent(link)}`)
+                .then(res => res.json())
+                .then(data => {
+                    dlResult.innerHTML = `<a href="${data.download}" target="_blank">Download Here</a>`;
+                });
+        }
+    </script>
+</body>
+</html>
+
+
+
